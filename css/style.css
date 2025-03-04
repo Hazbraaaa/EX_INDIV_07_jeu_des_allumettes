@@ -1,0 +1,31 @@
+body {
+    text-align: center;
+}
+
+#stack {
+    padding: 1em;
+    margin-top: 2em;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    border: 5px solid green;
+    border-radius: 1em;
+}
+
+img {
+    margin : 2px;
+}
+
+#info-container {
+    margin-top: 10px;
+}
+
+.selection {
+    padding: 1em;
+    margin-top: 2em;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    border: 3px solid green;
+    border-radius: 2em;
+}
