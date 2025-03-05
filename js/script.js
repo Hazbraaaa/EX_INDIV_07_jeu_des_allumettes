@@ -6,7 +6,7 @@ const playersContainer = document.querySelector('#players-container');
 let matchesRemaining = 20;
 let numberOfPlayers = Number(prompt("Nombre de joueurs ? Max = 4"));
 let players = [];
-let turn = 1;
+let currentPlayer = 0;
 
 
 // init functions
@@ -59,25 +59,31 @@ function createPlayers(numberOfPlayers) {
     })
 }
 
-function isMyTurn(player, selectionPlayer) {
-    if (turn == player) {
-        selectionPlayer.disabled = false;
-    }
-    else {
-        selectionPlayer.disabled = true;
-    }
+function updateTurn(allPlayers) {
+    allPlayers.forEach((select, index) => {
+        if (index == currentPlayer) {
+            select.disabled = false;
+        }
+        else {
+            select.disabled = true;
+        }
+    });
 }
 
-function nextTurn() {
-    if (turn > numberOfPlayers) {
-        turn = 1;
+function nextTurn(allPlayers) {
+    if (currentPlayer >= numberOfPlayers - 1) {
+        currentPlayer = 0;
     }
     else {
-        turn += 1;
+        currentPlayer += 1;
     }
+    updateTurn(allPlayers);
 }
 
 function activateSelection() {
+    const allPlayers = document.querySelectorAll('.selection');
+    
+    updateTurn(allPlayers);
     players.forEach((player) => {
         const selectionPlayer = document.querySelector(`#player${player}`);
 
@@ -92,6 +98,7 @@ function activateSelection() {
                 if (matchesRemaining == 0) {
                     infoContainer.innerText = `Joueur ${player} a perdu !`;
                 }
+                nextTurn(allPlayers);
             }
         });
     });
